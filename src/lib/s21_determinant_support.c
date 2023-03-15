@@ -64,15 +64,17 @@ double s21_minor_method(matrix_t *A) {
     if (A->rows == 2) {
         determinant = s21_second_order_matrix_determinant(A);
     } else {
+        matrix_t *minor = (matrix_t *)malloc(sizeof(matrix_t));
+
         for (int j = 0; j < A->columns; j++) {
-            matrix_t *minor = (matrix_t *)malloc(sizeof(matrix_t));
             s21_get_minor(A, 0, j, minor);
 
             determinant += s21_sign(0, j) * A->matrix[0][j] * s21_minor_method(minor);
 
             s21_remove_matrix(minor);
-            free(minor);
         }
+
+        free(minor);
     }
 
     return determinant;
