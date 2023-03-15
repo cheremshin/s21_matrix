@@ -28,16 +28,37 @@ LIB_SRCS = $(addprefix $(LIB_DIR),s21_common.c \
 								  s21_mult_number.c \
 								  s21_mult_matrix.c \
 								  s21_transpose.c \
+								  s21_calc_complements.c \
 								  s21_determinant.c \
 								  s21_determinant_support.c \
 								  s21_inverse_matrix.c)
 
+## Make array of all test files
+TEST_SRCS = $(addprefix $(TEST_DIR),s21_tests.c \
+									s21_calc_complements_tests.c \
+									s21_combined_tests.c \
+									s21_create_matrix_tests.c \
+									s21_determinant_tests.c \
+									s21_eq_matrix_tests.c \
+									s21_inverse_matrix_tests.c \
+									s21_mult_matrix_tests.c \
+									s21_mult_number_tests.c \
+									s21_sub_matrix_tests.c \
+									s21_sum_matrix_tests.c \
+									s21_transpose_tests.c \
+									common.c)
+
 LIB_OBJS = $(patsubst %.c, $(OBJ_DIR)%.o, $(LIB_SRCS))
 COV_OBJS = $(patsubst %.c, $(COV_OBJ_DIR)%.o, $(LIB_SRCS))
 
+TEST_EXEC = test
+COV_EXEC = $(COV_DIR)test_cov
+COV_INFO = $(COV_DIR)s21_matrix.info
+COV_REPORT = $(COV_DIR)/lib/index.html
+
 vpath %.c $(LIB_DIR)
 
-all: clean $(LIB)
+all: clean test
 
 $(LIB): $(LIB_OBJS)
 	ar rc $@ $^
@@ -50,6 +71,9 @@ $(LIB_OBJ_DIR)%.o: %.c $(LIB_HEADER)
 $(COV_OBJ_DIR)%.o: %.c $(LIB_HEADER)
 	@mkdir -p $(COV_OBJ_DIR)$(LIB_DIR)
 	@$(CC) $(FLAGS) $(INC_DIR) $(CCOV) -c $< -o $@
+
+test: $(LIB)
+	$(CC) $(FLAGS) $(INC_DIR) $(TEST_SRCS) $(LIB) $(CHECK_LIB) -o $(TEST_EXEC)
 
 style:
 	clang-format -n $(LIB_HEADER) lib/*
