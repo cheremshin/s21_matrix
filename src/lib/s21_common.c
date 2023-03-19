@@ -36,12 +36,15 @@ int s21_sign(int row, int sign) {
 void s21_get_minor(matrix_t *A, int row, int column, matrix_t *result) {
     s21_create_matrix(A->rows - 1, A->columns - 1, result);
 
-    for (int i = 0, m = 0, n = 0; i < A->rows; i++, m++) {
-        n = 0;
-        if (i == row) i++;
-        for (int j = 0; j < A->columns; j++, n++) {
-            if (j == column) j++;
-            result->matrix[m][n] = A->matrix[i][j];
-        }
-    }
+    int m = 0, n = 0;
+	for (int i = 0; i < A->rows; i++, m++) {
+		if (i == row) m--;
+		for (int j = 0; j < A->columns; j++) {
+			if(i != row && j != column) {
+				result->matrix[m][n] = A->matrix[i][j];
+				n++;
+			}
+		}
+		n = 0;
+	}
 }
