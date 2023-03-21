@@ -15,9 +15,10 @@ int s21_inverse_matrix(matrix_t *A, matrix_t *result) {
             s21_calc_complements(A, &complements);
             s21_transpose(&complements, &transpose);
 
-            s21_mult_number(&transpose, 1/determinant, result);
+            s21_mult_number(&transpose, 1 / determinant, result);
         } else {
-            s21_mult_number(A, 1/determinant, result);
+            s21_create_matrix(A->rows, A->columns, result);
+            result->matrix[0][0] = 1 / determinant;
         }
     } else {
         status = EXIT_CALCULATION_ERROR;
