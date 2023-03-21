@@ -8,7 +8,7 @@
  * 
  * @param A Matrix to be compared
  * @param B Matrix to be compared
- * @return Comparison result (SUCCESS/FAILURE)
+ * @return Exit code
  */
 int s21_eq_dimension(matrix_t *A, matrix_t *B);
 
@@ -16,7 +16,7 @@ int s21_eq_dimension(matrix_t *A, matrix_t *B);
  * @brief A function that checks matrix on equality of rows and columns
  * 
  * @param A Matrix to be checked
- * @return Check result (SUCCESS/FAILURE)
+ * @return Exit code
  */
 int s21_check_on_square(matrix_t *A);
 
@@ -27,6 +27,14 @@ int s21_check_on_square(matrix_t *A);
  * @param result Matrix to copy to
  */
 void s21_copy_matrix(matrix_t *A, matrix_t *result);
+
+/**
+ * @brief A function that check matrix on correct
+ * 
+ * @param A Matrix to be checked
+ * @return Exit code
+ */
+int s21_check_on_correct(matrix_t *A);
 
 /**
  * @brief A function that calculates sign

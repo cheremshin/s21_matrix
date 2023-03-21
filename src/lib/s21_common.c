@@ -1,20 +1,20 @@
 #include "s21_common.h"
 
 int s21_eq_dimension(matrix_t *A, matrix_t *B) {
-    int status = SUCCESS;
+    int status = EXIT_SUCCESS;
 
     if ((A->rows != B->rows) || (A->columns != B->columns)) {
-        status = FAILURE;
+        status = EXIT_CALCULATION_ERROR;
     }
 
     return status;
 }
 
 int s21_check_on_square(matrix_t *A) {
-    int status = SUCCESS;
+    int status = EXIT_SUCCESS;
 
     if (A->rows != A->columns) {
-        status = FAILURE;
+        status = EXIT_CALCULATION_ERROR;
     }
 
     return status;
@@ -27,6 +27,16 @@ void s21_copy_matrix(matrix_t *A, matrix_t *result) {
             result->matrix[i][j] = A->matrix[i][j];
         }
     }
+}
+
+int s21_check_on_correct(matrix_t *A) {
+    int status = EXIT_SUCCESS;
+
+    if ((A == NULL) || (A->matrix == NULL)) {
+        status = EXIT_INCORRECT_MATRIX;
+    }
+
+    return status;
 }
 
 int s21_sign(int row, int column) {
