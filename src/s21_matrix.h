@@ -13,7 +13,7 @@ typedef struct matrix_struct {
   int columns;     /**< Number of columns */
 } matrix_t;
 
-#define EPSILON 1e-7
+#define EPSILON 1e-6
 
 /**************************
  *       Exit codes       *
