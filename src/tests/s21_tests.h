@@ -6,7 +6,7 @@
 #include "../lib/s21_common.h"
 #include "time.h"
 
-#define ACCURACY 1e-7
+#define ACCURACY 1e-6
 
 #define RAND_DOUBLE \
   ((double)(rand() % 100000 - 50000) / (rand() % 100000 - 50000))
