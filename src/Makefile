@@ -58,7 +58,7 @@ COV_REPORT = $(COV_DIR)/lib/index.html
 
 vpath %.c $(LIB_DIR)
 
-all: clean test
+all: clean $(LIB)
 
 $(LIB): $(LIB_OBJS)
 	ar rc $@ $^
@@ -75,8 +75,19 @@ $(COV_OBJ_DIR)%.o: %.c $(LIB_HEADER)
 test: $(LIB)
 	$(CC) $(FLAGS) $(INC_DIR) $(TEST_SRCS) $(LIB) $(CHECK_LIB) -o $(TEST_EXEC)
 
+gcov_report: $(LIB) $(TEST_SRCS) $(COV_OBJS)
+	$(CC) $(FLAGS) $(INC_DIR) $(CCOV) $(LIB) $^ $(CHECK_LIB) -o $(COV_EXEC)
+	@-./$(COV_EXEC)
+	@lcov -q -c -d $(COV_DIR) -o $(COV_INFO) --exclude "$(TEST_DIR)*"
+	@genhtml -q $(COV_INFO) -o $(COV_DIR)
+	@open $(COV_REPORT)
+	@rm -rf *.gc*
+
 style:
-	clang-format -n $(LIB_HEADER) lib/*
+	clang-format -n $(LIB_HEADER) lib/* tests/coverage_test/* tests/cpp_part/*
+
+leaks: test
+	valgrind ./test
 
 clean:
 	rm -rf $(OBJ_DIR) \
