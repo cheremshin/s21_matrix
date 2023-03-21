@@ -29,8 +29,8 @@ void s21_copy_matrix(matrix_t *A, matrix_t *result) {
     }
 }
 
-int s21_sign(int row, int sign) {
-    return (row + sign % 2 == 0) ? 1 : -1;
+int s21_sign(int row, int column) {
+    return ((row + column) % 2 == 0) ? 1 : -1;
 }
 
 void s21_get_minor(matrix_t *A, int row, int column, matrix_t *result) {
