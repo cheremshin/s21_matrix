@@ -1,9 +1,17 @@
 #include "s21_matrix.h"
+#include "s21_common.h"
 
 int s21_mult_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {
     int status = EXIT_SUCCESS;
 
-    if ((A != NULL) && (B != NULL) && (A->columns == B->rows)) {
+    status = s21_check_on_correct(A);
+    if (status == EXIT_SUCCESS) {
+        if (A->columns != B->rows) {
+            status = EXIT_CALCULATION_ERROR;
+        }
+    }
+
+    if (status == EXIT_SUCCESS) {
         int M = A->rows, N = B->columns, K = A->columns;
         s21_create_matrix(M, N, result);
 
@@ -15,8 +23,6 @@ int s21_mult_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {
                 }
             }
         }
-    } else {
-        status = EXIT_CALCULATION_ERROR;
     }
 
     return status;

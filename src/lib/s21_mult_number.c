@@ -4,7 +4,9 @@
 int s21_mult_number(matrix_t *A, double number, matrix_t *result) {
     int status = EXIT_SUCCESS;
 
-    if (A != NULL) {
+    status = s21_check_on_correct(A);
+
+    if (status == EXIT_SUCCESS) {
         s21_create_matrix(A->rows, A->columns, result);
 
         for (size_t i = 0; i < A->rows; i++) {
@@ -12,8 +14,6 @@ int s21_mult_number(matrix_t *A, double number, matrix_t *result) {
                 result->matrix[i][j] = A->matrix[i][j] * number;
             }
         }
-    } else {
-        status = EXIT_CALCULATION_ERROR;
     }
 
     return status;

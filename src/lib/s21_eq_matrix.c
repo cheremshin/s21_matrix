@@ -6,7 +6,7 @@
 int s21_eq_matrix(matrix_t *A, matrix_t *B) {
     int status = SUCCESS;
 
-    status = (A != NULL) && (B != NULL) && s21_eq_dimension(A, B);
+    status = (A != NULL) && (B != NULL) && !s21_eq_dimension(A, B);
 
     if (status) {
         for (size_t i = 0; i < A->rows && status; i++) {
