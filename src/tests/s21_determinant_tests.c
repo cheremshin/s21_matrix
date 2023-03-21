@@ -1,5 +1,6 @@
-#include "s21_tests.h"
 #include <stdio.h>
+
+#include "s21_tests.h"
 START_TEST(determinant_test_0) {
   matrix_t A = {0};
 
