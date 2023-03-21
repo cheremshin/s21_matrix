@@ -8,20 +8,18 @@ int s21_calc_complements(matrix_t *A, matrix_t *result) {
         s21_create_matrix(A->rows, A->columns, result);
 
         double determinant;
-        matrix_t *minor = (matrix_t *)malloc(sizeof(matrix_t));
+        matrix_t minor = {0, 0, 0};
 
         for (int i = 0; i < A->rows; i++) {
             for (int j = 0; j < A->columns; j++) {
-                s21_get_minor(A, i, j, minor);
-                s21_determinant(minor, &determinant);
+                s21_get_minor(A, i, j, &minor);
+                s21_determinant(&minor, &determinant);
 
                 result->matrix[i][j] = s21_sign(i, j) * determinant;
 
-                s21_remove_matrix(minor);
+                s21_remove_matrix(&minor);
             }
         }
-
-        free(minor);
     } else {
         status = EXIT_CALCULATION_ERROR;
     }
