@@ -21,14 +21,6 @@ int s21_eq_dimension(matrix_t *A, matrix_t *B);
 int s21_check_on_square(matrix_t *A);
 
 /**
- * @brief A function that copies matrix
- * 
- * @param A Matrix to be copied
- * @param result Matrix to copy to
- */
-void s21_copy_matrix(matrix_t *A, matrix_t *result);
-
-/**
  * @brief A function that check matrix on correct
  * 
  * @param A Matrix to be checked

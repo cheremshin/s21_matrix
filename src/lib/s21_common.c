@@ -20,15 +20,6 @@ int s21_check_on_square(matrix_t *A) {
     return status;
 }
 
-void s21_copy_matrix(matrix_t *A, matrix_t *result) {
-    s21_create_matrix(A->rows, A->columns, result);
-    for (size_t i = 0; i < A->rows; i++) {
-        for (size_t j = 0; j < A->columns; j++) {
-            result->matrix[i][j] = A->matrix[i][j];
-        }
-    }
-}
-
 int s21_check_on_correct(matrix_t *A) {
     int status = EXIT_SUCCESS;
 
