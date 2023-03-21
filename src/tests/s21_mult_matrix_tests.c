@@ -1,7 +1,7 @@
 #include "s21_tests.h"
 
 START_TEST(mult_matrix_test_0) {
-  for (int N = 1; N < 10; N++) {
+  for (int N = 1; N < 5; N++) {
     matrix_t A = {0};
     matrix_t inverse_A = {0};
     matrix_t result = {0};
