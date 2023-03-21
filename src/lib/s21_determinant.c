@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 #include "s21_common.h"
 #include "s21_determinant_support.h"
 #include "s21_matrix.h"
