@@ -84,7 +84,7 @@ gcov_report: $(LIB) $(TEST_SRCS) $(COV_OBJS)
 	@rm -rf *.gc*
 
 style:
-	clang-format -n $(LIB_HEADER) lib/* tests/coverage_test/* tests/cpp_part/*
+	clang-format -n $(LIB_HEADER) lib/* tests/*
 
 leaks: test
 	valgrind ./test
