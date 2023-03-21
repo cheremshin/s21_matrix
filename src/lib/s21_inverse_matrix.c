@@ -6,8 +6,13 @@ int s21_inverse_matrix(matrix_t *A, matrix_t *result) {
 
     double determinant;
     status = s21_determinant(A, &determinant);
+    if (status == EXIT_SUCCESS) {
+        if (determinant == 0.0) {
+            status = EXIT_CALCULATION_ERROR;
+        }
+    }
 
-    if (status == EXIT_SUCCESS && determinant != 0.0) {
+    if (status == EXIT_SUCCESS) {
         if (A->rows != 1) {
             matrix_t complements = {0, 0, 0};
             matrix_t transpose = {0, 0, 0};
@@ -20,8 +25,6 @@ int s21_inverse_matrix(matrix_t *A, matrix_t *result) {
             s21_create_matrix(A->rows, A->columns, result);
             result->matrix[0][0] = 1 / determinant;
         }
-    } else {
-        status = EXIT_CALCULATION_ERROR;
     }
 
     return status;
